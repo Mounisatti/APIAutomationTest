@@ -1,0 +1,10 @@
+pip install jsonpath
+pip install openpyxl
+pip install robotframework
+pip install robotframework-SeleniumLibrary
+pip install allure-robotframework
+pip install requests
+pip install robotframework-requests
+pip install jsonpath_rw
+pip install jsonpath_rw_ext
+pip install jsonLibrary
