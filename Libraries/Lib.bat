@@ -7,4 +7,4 @@ pip install requests
 pip install robotframework-requests
 pip install jsonpath_rw
 pip install jsonpath_rw_ext
-pip install jsonLibrary
+pip install robotframework-jsonLibrary
