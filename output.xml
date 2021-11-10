@@ -1,0 +1,459 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 4.1.1 (Python 3.10.0 on win32)" generated="20211110 05:35:28.216" rpa="false" schemaversion="2">
+<suite id="s1" name="AllCases" source="C:\APITest\API-Automation\AllCases">
+<suite id="s1-s1" name="E2E" source="C:\APITest\API-Automation\AllCases\E2E">
+<suite id="s1-s1-s1" name="StudentID" source="C:\APITest\API-Automation\AllCases\E2E\StudentID.robot">
+<test id="s1-s1-s1-t1" name="TC1_Student_Details">
+<kw name="Create Session" library="RequestsLibrary">
+<arg>Student_Data</arg>
+<arg>${Url}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<msg timestamp="20211110 05:35:28.897" level="INFO">Creating Session using : alias=Student_Data, url=http://thetestingworldapi.com/, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" starttime="20211110 05:35:28.896" endtime="20211110 05:35:28.898"/>
+</kw>
+<kw name="GET On Session" library="RequestsLibrary">
+<var>${Response}</var>
+<arg>Student_Data</arg>
+<arg>api/studentsDetails/${Stu_ID}</arg>
+<doc>Sends a GET request on a previously created HTTP Session.</doc>
+<msg timestamp="20211110 05:35:29.370" level="INFO">GET Request : url=http://thetestingworldapi.com/api/studentsDetails/526996 
+ path_url=/api/studentsDetails/526996 
+ headers={'User-Agent': 'python-requests/2.26.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg timestamp="20211110 05:35:29.370" level="INFO">GET Response : url=http://thetestingworldapi.com/api/studentsDetails/526996 
+ status=200, reason=OK 
+ headers={'Cache-Control': 'no-cache', 'Pragma': 'no-cache', 'Content-Type': 'application/json; charset=utf-8', 'Expires': '-1', 'Server': 'Microsoft-IIS/8.5', 'X-AspNet-Version': '4.0.30319', 'X-Powered-By': 'ASP.NET', 'X-Powered-By-Plesk': 'PleskWin', 'Date': 'Wed, 10 Nov 2021 00:05:29 GMT', 'Content-Length': '40'} 
+ body={"status":"false","msg":"No data Found"} 
+ </msg>
+<msg timestamp="20211110 05:35:29.371" level="INFO">${Response} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20211110 05:35:28.899" endtime="20211110 05:35:29.371"/>
+</kw>
+<kw name="Convert To String" library="BuiltIn">
+<var>${actual_code}</var>
+<arg>${Response.status_code}</arg>
+<doc>Converts the given item to a Unicode string.</doc>
+<msg timestamp="20211110 05:35:29.374" level="INFO">${actual_code} = 200</msg>
+<status status="PASS" starttime="20211110 05:35:29.372" endtime="20211110 05:35:29.374"/>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<arg>${actual_code}</arg>
+<arg>200</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" starttime="20211110 05:35:29.375" endtime="20211110 05:35:29.376"/>
+</kw>
+<kw name="To Json" library="RequestsLibrary">
+<var>${json_res}</var>
+<arg>${Response.content}</arg>
+<doc>*DEPRECATED* Please use ${resp.json()} instead. Have a look at the improved HTML output as pretty printing replacement.</doc>
+<msg timestamp="20211110 05:35:29.378" level="WARN">Keyword 'RequestsLibrary.To Json' is deprecated. Please use ${resp.json()} instead. Have a look at the improved HTML output as pretty printing replacement.</msg>
+<msg timestamp="20211110 05:35:29.382" level="INFO">To JSON using : content={"status":"false","msg":"No data Found"} </msg>
+<msg timestamp="20211110 05:35:29.382" level="INFO">To JSON using : pretty_print=False </msg>
+<msg timestamp="20211110 05:35:29.382" level="INFO">${json_res} = {'status': 'false', 'msg': 'No data Found'}</msg>
+<status status="PASS" starttime="20211110 05:35:29.377" endtime="20211110 05:35:29.382"/>
+</kw>
+<kw name="Get Value From Json" library="JSONLibrary">
+<var>@{first_name}</var>
+<arg>${json_res}</arg>
+<arg>data.first_name</arg>
+<doc>Get Value From JSON using JSONPath</doc>
+<msg timestamp="20211110 05:35:29.469" level="INFO">@{first_name} = [ ]</msg>
+<status status="PASS" starttime="20211110 05:35:29.383" endtime="20211110 05:35:29.469"/>
+</kw>
+<kw name="Get From List" library="Collections">
+<var>${first_list}</var>
+<arg>${first_name}</arg>
+<arg>0</arg>
+<doc>Returns the value specified with an ``index`` from ``list``.</doc>
+<msg timestamp="20211110 05:35:29.472" level="FAIL">IndexError: Given index 0 is out of the range 0--1.</msg>
+<status status="FAIL" starttime="20211110 05:35:29.470" endtime="20211110 05:35:29.472"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>${first_list}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="NOT RUN" starttime="20211110 05:35:29.474" endtime="20211110 05:35:29.474"/>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<arg>${first_list}</arg>
+<arg>sample string 2</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="NOT RUN" starttime="20211110 05:35:29.475" endtime="20211110 05:35:29.475"/>
+</kw>
+<tag>Smoke</tag>
+<status status="FAIL" starttime="20211110 05:35:28.895" endtime="20211110 05:35:29.477">IndexError: Given index 0 is out of the range 0--1.</status>
+</test>
+<status status="FAIL" starttime="20211110 05:35:28.310" endtime="20211110 05:35:29.481"/>
+</suite>
+<suite id="s1-s1-s2" name="Validate Code" source="C:\APITest\API-Automation\AllCases\E2E\Validate_Code.robot">
+<test id="s1-s1-s2-t1" name="TC1_FectData">
+<kw name="Fetch_The_Details">
+<arg>50</arg>
+<arg>200</arg>
+<msg timestamp="20211110 05:35:29.509" level="FAIL">No keyword with name 'Fetch_The_Details' found.</msg>
+<status status="FAIL" starttime="20211110 05:35:29.508" endtime="20211110 05:35:29.509"/>
+</kw>
+<kw name="Fetch_Return_Data">
+<var>${response}=</var>
+<arg>50</arg>
+<status status="NOT RUN" starttime="20211110 05:35:29.517" endtime="20211110 05:35:29.517"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>${response.content}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="NOT RUN" starttime="20211110 05:35:29.518" endtime="20211110 05:35:29.518"/>
+</kw>
+<tag>Regression</tag>
+<status status="FAIL" starttime="20211110 05:35:29.499" endtime="20211110 05:35:29.520">No keyword with name 'Fetch_The_Details' found.</status>
+</test>
+<status status="FAIL" starttime="20211110 05:35:29.485" endtime="20211110 05:35:29.523"/>
+</suite>
+<status status="FAIL" starttime="20211110 05:35:28.303" endtime="20211110 05:35:29.527"/>
+</suite>
+<suite id="s1-s2" name="Get Del" source="C:\APITest\API-Automation\AllCases\Get_Del">
+<suite id="s1-s2-s1" name="Get request" source="C:\APITest\API-Automation\AllCases\Get_Del\Get_request.robot">
+<test id="s1-s2-s1-t1" name="TC1Request">
+<kw name="Welcome User" library="UserKeyword" type="SETUP">
+<doc>This is starting one</doc>
+<kw name="Log To Console" library="BuiltIn">
+<arg>This is my page</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20211110 05:35:29.565" endtime="20211110 05:35:29.566"/>
+</kw>
+<status status="PASS" starttime="20211110 05:35:29.563" endtime="20211110 05:35:29.566"/>
+</kw>
+<kw name="Create Session" library="RequestsLibrary">
+<arg>Get_Student_Details</arg>
+<arg>${Url}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<msg timestamp="20211110 05:35:29.568" level="INFO">Creating Session using : alias=Get_Student_Details, url=http://thetestingworldapi.com/, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" starttime="20211110 05:35:29.567" endtime="20211110 05:35:29.569"/>
+</kw>
+<kw name="GET On Session" library="RequestsLibrary">
+<var>${response}</var>
+<arg>Get_Student_Details</arg>
+<arg>api/studentsDetails</arg>
+<doc>Sends a GET request on a previously created HTTP Session.</doc>
+<msg timestamp="20211110 05:35:30.247" level="INFO">GET Request : url=http://thetestingworldapi.com/api/studentsDetails 
+ path_url=/api/studentsDetails 
+ headers={'User-Agent': 'python-requests/2.26.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg timestamp="20211110 05:35:30.248" level="INFO">GET Response : url=http://thetestingworldapi.com/api/studentsDetails 
+ status=200, reason=OK 
+ headers={'Cache-Control': 'no-cache', 'Pragma': 'no-cache', 'Content-Type': 'application/json; charset=utf-8', 'Expires': '-1', 'Server': 'Microsoft-IIS/8.5', 'X-AspNet-Version': '4.0.30319', 'X-Powered-By': 'ASP.NET', 'X-Powered-By-Plesk': 'PleskWin', 'Date': 'Wed, 10 Nov 2021 00:05:29 GMT', 'Content-Length': '11504'} 
+ body=[{"id":527476,"first_name":"Testing","middle_name":"Data","last_name":"World","date_of_birth":"7/11/2021"},{"id":527474,"first_name":"{{fist_name}}","middle_name":"{{middle_name}}","last_name":"{{last_name}}","date_of_birth":"{{date_of_birth}}"},{"id":527473,"first_name":"{{fist_name}}","middle_name":"{{middle_name}}","last_name":"{{last_name}}","date_of_birth":"{{date_of_birth}}"},{"id":527471,"first_name":"{{fist_name}}","middle_name":"{{middle_name}}","last_name":"{{last_name}}","date_of_birth":"{{date_of_birth}}"},{"id":527468,"first_name":"{{fist_name}}","middle_name":"{{middle_name}}","last_name":"{{last_name}}","date_of_birth":"{{date_of_birth}}"},{"id":527467,"first_name":"{{fist_name}}","middle_name":"{{middle_name}}","last_name":"{{last_name}}","date_of_birth":"{{date_of_birth}}"},{"id":527466,"first_name":"{{fist_name}}","middle_name":"{{middle_name}}","last_name":"{{last_name}}","date_of_birth":"{{date_of_birth}}"},{"id":527465,"first_name":"{{fist_name}}","middle_name":"{{middle_name}}","last_name":"{{last_name}}","date_of_birth":"{{date_of_birth}}"},{"id":527464,"first_name":"A","middle_name":"B","last_name":"C","date_of_birth":"1/18/2022"},{"id":527463,"first_name":"{{fist_name}}","middle_name":"{{middle_name}}","last_name":"{{last_name}}","date_of_birth":"{{date_of_birth}}"},{"id":527462,"first_name":"{{fist_name}}","middle_name":"{{middle_name}}","last_name":"{{last_name}}","date_of_birth":"{{date_of_birth}}"},{"id":527461,"first_name":"{{fist_name}}","middle_name":"{{middle_name}}","last_name":"{{last_name}}","date_of_birth":"{{date_of_birth}}"},{"id":527460,"first_name":"{{fist_name}}","middle_name":"{{middle_name}}","last_name":"{{last_name}}","date_of_birth":"{{date_of_birth}}"},{"id":527459,"first_name":"{{fist_name}}","middle_name":"{{middle_name}}","last_name":"{{last_name}}","date_of_birth":"{{date_of_birth}}"},{"id":527458,"first_name":"{{fist_name}}","middle_name":"{{middle_name}}","last_name":"{{last_name}}","date_of_birth":"{{date_of_birth}}"},{"id":527457,"first_name":"{{fist_name}}","middle_name":"{{middle_name}}","last_name":"{{last_name}}","date_of_birth":"{{date_of_birth}}"},{"id":527456,"first_name":"{{fist_name}}","middle_name":"{{middle_name}}","last_name":"{{last_name}}","date_of_birth":"{{date_of_birth}}"},{"id":527455,"first_name":"{{fist_name}}","middle_name":"{{middle_name}}","last_name":"{{last_name}}","date_of_birth":"{{date_of_birth}}"},{"id":527454,"first_name":"{{fist_name}}","middle_name":"{{middle_name}}","last_name":"{{last_name}}","date_of_birth":"{{date_of_birth}}"},{"id":527453,"first_name":"ashok","middle_name":"naidu","last_name":"bommu","date_of_birth":"20/6/1994"},{"id":527452,"first_name":"ashok","middle_name":"naidu","last_name":"bommu","date_of_birth":"20/6/1994"},{"id":527451,"first_name":"ashok","middle_name":"naidu","last_name":"bommu","date_of_birth":"20/6/1994"},{"id":527450,"first_name":"ashok","middle_name":"naidu","last_name":"bommu","date_of_birth":"20/6/1994"},{"id":527449,"first_name":"ashok","middle_name":"naidu","last_name":"bommu","date_of_birth":"20/6/1994"},{"id":527448,"first_name":"ashok","middle_name":"naidu","last_name":"bommu","date_of_birth":"20/6/1994"},{"id":527447,"first_name":"ashok","middle_name":"naidu","last_name":"bommu","date_of_birth":"20/6/1994"},{"id":527443,"first_name":"Hung","middle_name":"Huy","last_name":"Nguyen","date_of_birth":"29/10/1992"},{"id":527442,"first_name":"Hung","middle_name":"Huy","last_name":"Nguyen","date_of_birth":"29/10/1992"},{"id":527441,"first_name":"Hung","middle_name":"Huy","last_name":"Nguyen","date_of_birth":"29/10/1992"},{"id":527440,"first_name":"Hung","middle_name":"Huy","last_name":"Nguyen","date_of_birth":"29/10/1992"},{"id":527439,"first_name":"Hung","middle_name":"Huy","last_name":"Nguyen","date_of_birth":"29/10/1992"},{"id":527438,"first_name":"ashok","middle_name":"naidu","last_name":"bommu","date_of_birth":"20/6/1994"},{"id":527437,"first_name":"Hung","middle_name":"Huy","last_name":"Nguyen","date_of_birth":"29/10/1992"},{"id":527436,"first_name":"ashok","middle_name":"naidu","last_name":"bommu","date_of_birth":"20/6/1994"},{"id":527435,"first_name":"ashok","middle_name":"naidu","last_name":"bommu","date_of_birth":"20/6/1994"},{"id":527434,"first_name":"Hung","middle_name":"Huy","last_name":"Nguyen","date_of_birth":"29/10/1992"},{"id":527433,"first_name":"ashok","middle_name":"naidu","last_name":"bommu","date_of_birth":"20/6/1994"},{"id":527432,"first_name":"ashok","middle_name":"naidu","last_name":"bommu","date_of_birth":"20/6/1994"},{"id":527431,"first_name":"Hung","middle_name":"Huy","last_name":"Nguyen","date_of_birth":"29/10/1992"},{"id":527430,"first_name":"ashok","middle_name":"naidu","last_name":"bommu","date_of_birth":"20/6/1994"},{"id":527429,"first_name":"ashok","middle_name":"naidu","last_name":"bommu","date_of_birth":"20/6/1994"},{"id":527428,"first_name":"ashok","middle_name":"naidu","last_name":"bommu","date_of_birth":"20/6/1994"},{"id":527426,"first_name":"Jon","middle_name":"","last_name":"Snow","date_of_birth":"10/10/1992"},{"id":527425,"first_name":"ashok","middle_name":"naidu","last_name":"bommu","date_of_birth":"20/6/1994"},{"id":527424,"first_name":"Jon","middle_name":"","last_name":"Snow","date_of_birth":"10/10/1992"},{"id":527423,"first_name":"Jon","middle_name":"","last_name":"Snow","date_of_birth":"10/10/1992"},{"id":527422,"first_name":"{{fist_name}}","middle_name":"{{middle_name}}","last_name":"{{last_name}}","date_of_birth":"{{date_of_birth}}"},{"id":527421,"first_name":"bheemla","middle_name":"nayak","last_name":"pk","date_of_birth":"2/9/1978"},{"id":527420,"first_name":"bheemla","middle_name":"nayak","last_name":"pk","date_of_birth":"2/9/1978"},{"id":527419,"first_name":"bheemla","middle_name":"nayak","last_name":"pk","date_of_birth":"2/9/1978"},{"id":527418,"first_name":"bheemla","middle_name":"nayak","last_name":"pk","date_of_birth":"2/9/1978"},{"id":527417,"first_name":"bheemla","middle_name":"nayak","last_name":"pk","date_of_birth":"2/9/1978"},{"id":527416,"first_name":"bheemla","middle_name":"nayak","last_name":"pk","date_of_birth":"2/9/1978"},{"id":527415,"first_name":"bheemla","middle_name":"nayak","last_name":"pk","date_of_birth":"2/9/1978"},{"id":527414,"first_name":"bheemla","middle_name":"nayak","last_name":"pk","date_of_birth":"2/9/1978"},{"id":527413,"first_name":"bheemla","middle_name":"nayak","last_name":"pk","date_of_birth":"2/9/1978"},{"id":527412,"first_name":"bheemla","middle_name":"nayak","last_name":"pk","date_of_birth":"2/9/1978"},{"id":527411,"first_name":"{{fist_name}}","middle_name":"{{middle_name}}","last_name":"{{last_name}}","date_of_birth":"{{date_of_birth}}"},{"id":527410,"first_name":"Hung","middle_name":"Huy","last_name":"Nguyen","date_of_birth":"29/10/1992"},{"id":527409,"first_name":"Hung","middle_name":"Huy","last_name":"Nguyen","date_of_birth":"29/10/1992"},{"id":527408,"first_name":"Hung","middle_name":"Huy","last_name":"Nguyen","date_of_birth":"29/10/1992"},{"id":527407,"first_name":"Hung","middle_name":"Huy","last_name":"Nguyen","date_of_birth":"29/10/1992"},{"id":527406,"first_name":"Hung","middle_name":"Huy","last_name":"Nguyen","date_of_birth":"29/10/1992"},{"id":527405,"first_name":"Jon","middle_name":"","last_name":"Snow","date_of_birth":"10/10/1992"},{"id":527404,"first_name":"Jon","middle_name":"","last_name":"Snow","date_of_birth":"10/10/1992"},{"id":527403,"first_name":"Jon","middle_name":"","last_name":"Snow","date_of_birth":"10/10/1992"},{"id":527402,"first_name":"{{fist_name}}","middle_name":"{{middle_name}}","last_name":"{{last_name}}","date_of_birth":"{{date_of_birth}}"},{"id":527401,"first_name":"Jon","middle_name":"","last_name":"Snow","date_of_birth":"29/10/1992"},{"id":527400,"first_name":"Jon","middle_name":"","last_name":"Snow","date_of_birth":"10/10/1992"},{"id":527399,"first_name":"Jon","middle_name":null,"last_name":"Snow","date_of_birth":"10/10/1992"},{"id":527398,"first_name":"{{fist_name}}","middle_name":"{{middle_name}}","last_name":"{{last_name}}","date_of_birth":"{{date_of_birth}}"},{"id":527397,"first_name":"{{fist_name}}","middle_name":"{{middle_name}}","last_name":"{{last_name}}","date_of_birth":"{{date_of_birth}}"},{"id":527396,"first_name":"{{fist_name}}","middle_name":"{{middle_name}}","last_name":"{{last_name}}","date_of_birth":"{{date_of_birth}}"},{"id":527395,"first_name":"{{fist_name}}","middle_name":"{{middle_name}}","last_name":"{{last_name}}","date_of_birth":"{{date_of_birth}}"},{"id":527394,"first_name":"{{fist_name}}","middle_name":"{{middle_name}}","last_name":"{{last_name}}","date_of_birth":"{{date_of_birth}}"},{"id":527393,"first_name":"{{fist_name}}","middle_name":"{{middle_name}}","last_name":"{{last_name}}","date_of_birth":"{{date_of_birth}}"},{"id":527392,"first_name":"{{fist_name}}","middle_name":"{{middle_name}}","last_name":"{{last_name}}","date_of_birth":"{{date_of_birth}}"},{"id":527391,"first_name":"A","middle_name":"B","last_name":"C","date_of_birth":"1/18/2022"},{"id":527390,"first_name":"{{fist_name}}","middle_name":"{{middle_name}}","last_name":"{{last_name}}","date_of_birth":"{{date_of_birth}}"},{"id":527389,"first_name":"{{fist_name}}","middle_name":"{{middle_name}}","last_name":"{{last_name}}","date_of_birth":"{{date_of_birth}}"},{"id":527388,"first_name":"{{fist_name}}","middle_name":"{{middle_name}}","last_name":"{{last_name}}","date_of_birth":"{{date_of_birth}}"},{"id":527386,"first_name":"MASHROOR","middle_name":"Ahmed","last_name":"Sakib","date_of_birth":"20-07-1998"},{"id":527385,"first_name":"MASHROOR","middle_name":"Ahmed","last_name":"Sakib","date_of_birth":"20-07-1998"},{"id":527384,"first_name":"MASHROOR","middle_name":"Ahmed","last_name":"Sakib","date_of_birth":"20-07-1998"},{"id":527383,"first_name":"MAdsd","middle_name":"Ahmed","last_name":"Sakib","date_of_birth":"20-07-1998"},{"id":527382,"first_name":"{{fist_name}}","middle_name":"{{middle_name}}","last_name":"{{last_name}}","date_of_birth":"{{date_of_birth}}"},{"id":527381,"first... (set the log level to DEBUG or TRACE to see the full content) 
+ </msg>
+<msg timestamp="20211110 05:35:30.251" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20211110 05:35:29.570" endtime="20211110 05:35:30.251"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>${response.status_code}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20211110 05:35:30.253" endtime="20211110 05:35:30.255"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>${response.content}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20211110 05:35:30.256" endtime="20211110 05:35:30.266"/>
+</kw>
+<kw name="End User" library="UserKeyword" type="TEARDOWN">
+<doc>This is Ending</doc>
+<kw name="Log To Console" library="BuiltIn">
+<arg>This is my end page</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20211110 05:35:30.269" endtime="20211110 05:35:30.270"/>
+</kw>
+<status status="PASS" starttime="20211110 05:35:30.268" endtime="20211110 05:35:30.271"/>
+</kw>
+<tag>Regression</tag>
+<status status="PASS" starttime="20211110 05:35:29.561" endtime="20211110 05:35:30.272"/>
+</test>
+<status status="PASS" starttime="20211110 05:35:29.538" endtime="20211110 05:35:30.276"/>
+</suite>
+<suite id="s1-s2-s2" name="GetParam" source="C:\APITest\API-Automation\AllCases\Get_Del\GetParam.robot">
+<test id="s1-s2-s2-t1" name="Test1">
+<kw name="Create Session" library="RequestsLibrary">
+<arg>Get_Param</arg>
+<arg>${url}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<msg timestamp="20211110 05:35:30.298" level="INFO">Creating Session using : alias=Get_Param, url=https://reqres.in, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" starttime="20211110 05:35:30.297" endtime="20211110 05:35:30.299"/>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<var>&amp;{param}</var>
+<arg>page=2</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20211110 05:35:30.302" level="INFO">&amp;{param} = { page=2 }</msg>
+<status status="PASS" starttime="20211110 05:35:30.300" endtime="20211110 05:35:30.302"/>
+</kw>
+<kw name="GET On Session" library="RequestsLibrary">
+<var>${response}</var>
+<arg>Get_param</arg>
+<arg>/api/users</arg>
+<arg>params=${param}</arg>
+<doc>Sends a GET request on a previously created HTTP Session.</doc>
+<msg timestamp="20211110 05:35:30.887" level="INFO">GET Request : url=https://reqres.in/api/users?page=2 
+ path_url=/api/users?page=2 
+ headers={'User-Agent': 'python-requests/2.26.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg timestamp="20211110 05:35:30.888" level="INFO">GET Response : url=https://reqres.in/api/users?page=2 
+ status=200, reason=OK 
+ headers={'Date': 'Wed, 10 Nov 2021 00:05:31 GMT', 'Content-Type': 'application/json; charset=utf-8', 'Transfer-Encoding': 'chunked', 'Connection': 'keep-alive', 'x-powered-by': 'Express', 'access-control-allow-origin': '*', 'etag': 'W/"406-ut0vzoCuidvyMf8arZpMpJ6ZRDw"', 'via': '1.1 vegur', 'Cache-Control': 'max-age=14400', 'CF-Cache-Status': 'HIT', 'Age': '3872', 'Expect-CT': 'max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"', 'Report-To': '{"endpoints":[{"url":"https:\\/\\/a.nel.cloudflare.com\\/report\\/v3?s=8BNORtEm%2F%2B9kmprOLiYl%2BF9O8Oi1jsBixerydZAd3I3CuH%2FE50beY2vOrMwPW2lEosBZbhXQGuMP9UBhytfJlFc2x8%2ByA2T%2BIMWU3RbgR74zTpMvjsyWFeOgysEx1gL5tcs1kcvZpFo%3D"}],"group":"cf-nel","max_age":604800}', 'NEL': '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}', 'Vary': 'Accept-Encoding', 'Server': 'cloudflare', 'CF-RAY': '6abb0796db4f57d0-IAD', 'Content-Encoding': 'gzip', 'alt-svc': 'h3=":443"; ma=86400, h3-29=":443"; ma=86400, h3-28=":443"; ma=86400, h3-27=":443"; ma=86400'} 
+ body={"page":2,"per_page":6,"total":12,"total_pages":2,"data":[{"id":7,"email":"michael.lawson@reqres.in","first_name":"Michael","last_name":"Lawson","avatar":"https://reqres.in/img/faces/7-image.jpg"},{"id":8,"email":"lindsay.ferguson@reqres.in","first_name":"Lindsay","last_name":"Ferguson","avatar":"https://reqres.in/img/faces/8-image.jpg"},{"id":9,"email":"tobias.funke@reqres.in","first_name":"Tobias","last_name":"Funke","avatar":"https://reqres.in/img/faces/9-image.jpg"},{"id":10,"email":"byron.fields@reqres.in","first_name":"Byron","last_name":"Fields","avatar":"https://reqres.in/img/faces/10-image.jpg"},{"id":11,"email":"george.edwards@reqres.in","first_name":"George","last_name":"Edwards","avatar":"https://reqres.in/img/faces/11-image.jpg"},{"id":12,"email":"rachel.howell@reqres.in","first_name":"Rachel","last_name":"Howell","avatar":"https://reqres.in/img/faces/12-image.jpg"}],"support":{"url":"https://reqres.in/#support-heading","text":"To keep ReqRes free, contributions towards server costs are appreciated!"}} 
+ </msg>
+<msg timestamp="20211110 05:35:30.888" level="INFO">C:\Users\user\AppData\Roaming\Python\Python310\site-packages\urllib3\connectionpool.py:1013: InsecureRequestWarning: Unverified HTTPS request is being made to host 'reqres.in'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/1.26.x/advanced-usage.html#ssl-warnings
+  warnings.warn(</msg>
+<msg timestamp="20211110 05:35:30.890" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20211110 05:35:30.303" endtime="20211110 05:35:30.890"/>
+</kw>
+<kw name="Convert To String" library="BuiltIn">
+<var>${status_code}</var>
+<arg>${response.status_code}</arg>
+<doc>Converts the given item to a Unicode string.</doc>
+<msg timestamp="20211110 05:35:30.895" level="INFO">${status_code} = 200</msg>
+<status status="PASS" starttime="20211110 05:35:30.892" endtime="20211110 05:35:30.895"/>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<arg>${status_code}</arg>
+<arg>200</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" starttime="20211110 05:35:30.897" endtime="20211110 05:35:30.899"/>
+</kw>
+<kw name="To Json" library="RequestsLibrary">
+<var>${jsonresponse}</var>
+<arg>${response.content}</arg>
+<doc>*DEPRECATED* Please use ${resp.json()} instead. Have a look at the improved HTML output as pretty printing replacement.</doc>
+<msg timestamp="20211110 05:35:30.900" level="WARN">Keyword 'RequestsLibrary.To Json' is deprecated. Please use ${resp.json()} instead. Have a look at the improved HTML output as pretty printing replacement.</msg>
+<msg timestamp="20211110 05:35:30.908" level="INFO">To JSON using : content={"page":2,"per_page":6,"total":12,"total_pages":2,"data":[{"id":7,"email":"michael.lawson@reqres.in","first_name":"Michael","last_name":"Lawson","avatar":"https://reqres.in/img/faces/7-image.jpg"},{"id":8,"email":"lindsay.ferguson@reqres.in","first_name":"Lindsay","last_name":"Ferguson","avatar":"https://reqres.in/img/faces/8-image.jpg"},{"id":9,"email":"tobias.funke@reqres.in","first_name":"Tobias","last_name":"Funke","avatar":"https://reqres.in/img/faces/9-image.jpg"},{"id":10,"email":"byron.fields@reqres.in","first_name":"Byron","last_name":"Fields","avatar":"https://reqres.in/img/faces/10-image.jpg"},{"id":11,"email":"george.edwards@reqres.in","first_name":"George","last_name":"Edwards","avatar":"https://reqres.in/img/faces/11-image.jpg"},{"id":12,"email":"rachel.howell@reqres.in","first_name":"Rachel","last_name":"Howell","avatar":"https://reqres.in/img/faces/12-image.jpg"}],"support":{"url":"https://reqres.in/#support-heading","text":"To keep ReqRes free, contributions towards server costs are appreciated!"}} </msg>
+<msg timestamp="20211110 05:35:30.908" level="INFO">To JSON using : pretty_print=False </msg>
+<msg timestamp="20211110 05:35:30.909" level="INFO">${jsonresponse} = {'page': 2, 'per_page': 6, 'total': 12, 'total_pages': 2, 'data': [{'id': 7, 'email': 'michael.lawson@reqres.in', 'first_name': 'Michael', 'last_name': 'Lawson', 'avatar': 'https://reqres.in/img/faces...</msg>
+<status status="PASS" starttime="20211110 05:35:30.900" endtime="20211110 05:35:30.909"/>
+</kw>
+<kw name="Get Value From Json" library="JSONLibrary">
+<var>@{name_list}</var>
+<arg>${jsonresponse}</arg>
+<arg>data[0].first_name</arg>
+<doc>Get Value From JSON using JSONPath</doc>
+<msg timestamp="20211110 05:35:31.080" level="INFO">@{name_list} = [ Michael ]</msg>
+<status status="PASS" starttime="20211110 05:35:30.910" endtime="20211110 05:35:31.080"/>
+</kw>
+<kw name="Get From List" library="Collections">
+<var>${name}</var>
+<arg>${name_list}</arg>
+<arg>0</arg>
+<doc>Returns the value specified with an ``index`` from ``list``.</doc>
+<msg timestamp="20211110 05:35:31.082" level="INFO">${name} = Michael</msg>
+<status status="PASS" starttime="20211110 05:35:31.081" endtime="20211110 05:35:31.083"/>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<arg>${name}</arg>
+<arg>Michael</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" starttime="20211110 05:35:31.084" endtime="20211110 05:35:31.085"/>
+</kw>
+<tag>Smoke</tag>
+<status status="PASS" starttime="20211110 05:35:30.295" endtime="20211110 05:35:31.086"/>
+</test>
+<status status="PASS" starttime="20211110 05:35:30.280" endtime="20211110 05:35:31.089"/>
+</suite>
+<suite id="s1-s2-s3" name="ID request" source="C:\APITest\API-Automation\AllCases\Get_Del\ID_request.robot">
+<test id="s1-s2-s3-t1" name="TC1_Student_ID">
+<kw name="Create Session" library="RequestsLibrary">
+<arg>Student_ID</arg>
+<arg>${url}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<msg timestamp="20211110 05:35:31.105" level="INFO">Creating Session using : alias=Student_ID, url=http://thetestingworldapi.com/, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" starttime="20211110 05:35:31.104" endtime="20211110 05:35:31.105"/>
+</kw>
+<kw name="GET On Session" library="RequestsLibrary">
+<var>${response}</var>
+<arg>Student_ID</arg>
+<arg>api/studentsDetails/${Stu_ID}</arg>
+<doc>Sends a GET request on a previously created HTTP Session.</doc>
+<msg timestamp="20211110 05:35:31.564" level="INFO">GET Request : url=http://thetestingworldapi.com/api/studentsDetails/526792 
+ path_url=/api/studentsDetails/526792 
+ headers={'User-Agent': 'python-requests/2.26.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg timestamp="20211110 05:35:31.564" level="INFO">GET Response : url=http://thetestingworldapi.com/api/studentsDetails/526792 
+ status=200, reason=OK 
+ headers={'Cache-Control': 'no-cache', 'Pragma': 'no-cache', 'Content-Type': 'application/json; charset=utf-8', 'Expires': '-1', 'Server': 'Microsoft-IIS/8.5', 'X-AspNet-Version': '4.0.30319', 'X-Powered-By': 'ASP.NET', 'X-Powered-By-Plesk': 'PleskWin', 'Date': 'Wed, 10 Nov 2021 00:05:31 GMT', 'Content-Length': '147'} 
+ body={"status":"true","data":{"id":526792,"first_name":"Naruto","middle_name":"Banana last_name=Uzumaki","last_name":null,"date_of_birth":"12/23/2006"}} 
+ </msg>
+<msg timestamp="20211110 05:35:31.565" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20211110 05:35:31.106" endtime="20211110 05:35:31.565"/>
+</kw>
+<kw name="Convert To String" library="BuiltIn">
+<var>${actual_code}</var>
+<arg>${response.status_code}</arg>
+<doc>Converts the given item to a Unicode string.</doc>
+<msg timestamp="20211110 05:35:31.569" level="INFO">${actual_code} = 200</msg>
+<status status="PASS" starttime="20211110 05:35:31.566" endtime="20211110 05:35:31.569"/>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<arg>${actual_code}</arg>
+<arg>200</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" starttime="20211110 05:35:31.570" endtime="20211110 05:35:31.572"/>
+</kw>
+<tag>Smoke</tag>
+<status status="PASS" starttime="20211110 05:35:31.102" endtime="20211110 05:35:31.574"/>
+</test>
+<status status="PASS" starttime="20211110 05:35:31.094" endtime="20211110 05:35:31.579"/>
+</suite>
+<status status="PASS" starttime="20211110 05:35:29.531" endtime="20211110 05:35:31.584"/>
+</suite>
+<suite id="s1-s3" name="Put Post" source="C:\APITest\API-Automation\AllCases\Put_Post">
+<suite id="s1-s3-s1" name="Json postdata" source="C:\APITest\API-Automation\AllCases\Put_Post\Json_postdata.robot">
+<test id="s1-s3-s1-t1" name="TC1_New_Source">
+<kw name="Create Session" library="RequestsLibrary">
+<arg>Add_data</arg>
+<arg>${url}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<msg timestamp="20211110 05:35:31.620" level="INFO">Creating Session using : alias=Add_data, url=http://thetestingworldapi.com/, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" starttime="20211110 05:35:31.619" endtime="20211110 05:35:31.621"/>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<var>&amp;{body}</var>
+<arg>first_name=Testing</arg>
+<arg>middle_name=Data</arg>
+<arg>last_name=World</arg>
+<arg>date_of_birth=7/11/2021</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20211110 05:35:31.623" level="INFO">&amp;{body} = { first_name=Testing | middle_name=Data | last_name=World | date_of_birth=7/11/2021 }</msg>
+<status status="PASS" starttime="20211110 05:35:31.622" endtime="20211110 05:35:31.623"/>
+</kw>
+<kw name="Fetch_json">
+<var>${jsoncode}=</var>
+<msg timestamp="20211110 05:35:31.633" level="FAIL">No keyword with name 'Fetch_json' found.</msg>
+<status status="FAIL" starttime="20211110 05:35:31.632" endtime="20211110 05:35:31.633"/>
+</kw>
+<kw name="POST On Session" library="RequestsLibrary">
+<var>${response}</var>
+<arg>Add_data</arg>
+<arg>api/studentsDetails</arg>
+<arg>data=${jsoncode}</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="NOT RUN" starttime="20211110 05:35:31.635" endtime="20211110 05:35:31.635"/>
+</kw>
+<kw name="Convert To String" library="BuiltIn">
+<var>${code}</var>
+<arg>${response.status_code}</arg>
+<doc>Converts the given item to a Unicode string.</doc>
+<status status="NOT RUN" starttime="20211110 05:35:31.636" endtime="20211110 05:35:31.636"/>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<arg>${code}</arg>
+<arg>201</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="NOT RUN" starttime="20211110 05:35:31.637" endtime="20211110 05:35:31.637"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>${response.content}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="NOT RUN" starttime="20211110 05:35:31.638" endtime="20211110 05:35:31.639"/>
+</kw>
+<tag>Hello</tag>
+<tag>Regression</tag>
+<status status="FAIL" starttime="20211110 05:35:31.617" endtime="20211110 05:35:31.640">No keyword with name 'Fetch_json' found.</status>
+</test>
+<status status="FAIL" starttime="20211110 05:35:31.597" endtime="20211110 05:35:31.644"/>
+</suite>
+<suite id="s1-s3-s2" name="Post request" source="C:\APITest\API-Automation\AllCases\Put_Post\Post_request.robot">
+<test id="s1-s3-s2-t1" name="TC1_post">
+<kw name="Create Session" library="RequestsLibrary">
+<arg>Add_data</arg>
+<arg>${url}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<msg timestamp="20211110 05:35:31.664" level="INFO">Creating Session using : alias=Add_data, url=http://thetestingworldapi.com/, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" starttime="20211110 05:35:31.663" endtime="20211110 05:35:31.664"/>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<var>&amp;{body}</var>
+<arg>first_name=Testing</arg>
+<arg>middle_name=Data</arg>
+<arg>last_name=World</arg>
+<arg>date_of_birth=7/11/2021</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20211110 05:35:31.667" level="INFO">&amp;{body} = { first_name=Testing | middle_name=Data | last_name=World | date_of_birth=7/11/2021 }</msg>
+<status status="PASS" starttime="20211110 05:35:31.666" endtime="20211110 05:35:31.667"/>
+</kw>
+<kw name="POST On Session" library="RequestsLibrary">
+<var>${response}</var>
+<arg>Add_data</arg>
+<arg>api/studentsDetails</arg>
+<arg>data=${body}</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<msg timestamp="20211110 05:35:32.126" level="INFO">POST Request : url=http://thetestingworldapi.com/api/studentsDetails 
+ path_url=/api/studentsDetails 
+ headers={'User-Agent': 'python-requests/2.26.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '79', 'Content-Type': 'application/x-www-form-urlencoded'} 
+ body=first_name=Testing&amp;middle_name=Data&amp;last_name=World&amp;date_of_birth=7%2F11%2F2021 
+ </msg>
+<msg timestamp="20211110 05:35:32.126" level="INFO">POST Response : url=http://thetestingworldapi.com/api/studentsDetails 
+ status=201, reason=Created 
+ headers={'Cache-Control': 'no-cache', 'Pragma': 'no-cache', 'Content-Type': 'application/json; charset=utf-8', 'Expires': '-1', 'Location': 'http://thetestingworldapi.com/api/studentsDetails/527477', 'Server': 'Microsoft-IIS/8.5', 'X-AspNet-Version': '4.0.30319', 'X-Powered-By': 'ASP.NET', 'X-Powered-By-Plesk': 'PleskWin', 'Date': 'Wed, 10 Nov 2021 00:05:31 GMT', 'Content-Length': '105'} 
+ body={"id":527477,"first_name":"Testing","middle_name":"Data","last_name":"World","date_of_birth":"7/11/2021"} 
+ </msg>
+<msg timestamp="20211110 05:35:32.127" level="INFO">${response} = &lt;Response [201]&gt;</msg>
+<status status="PASS" starttime="20211110 05:35:31.668" endtime="20211110 05:35:32.127"/>
+</kw>
+<kw name="Convert To String" library="BuiltIn">
+<var>${code}</var>
+<arg>${response.status_code}</arg>
+<doc>Converts the given item to a Unicode string.</doc>
+<msg timestamp="20211110 05:35:32.131" level="INFO">${code} = 201</msg>
+<status status="PASS" starttime="20211110 05:35:32.129" endtime="20211110 05:35:32.132"/>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<arg>${code}</arg>
+<arg>201</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" starttime="20211110 05:35:32.133" endtime="20211110 05:35:32.134"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>${response.content}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20211110 05:35:32.136" endtime="20211110 05:35:32.139"/>
+</kw>
+<tag>Hello</tag>
+<status status="PASS" starttime="20211110 05:35:31.661" endtime="20211110 05:35:32.140"/>
+</test>
+<status status="PASS" starttime="20211110 05:35:31.649" endtime="20211110 05:35:32.144"/>
+</suite>
+<status status="FAIL" starttime="20211110 05:35:31.589" endtime="20211110 05:35:32.152"/>
+</suite>
+<status status="FAIL" starttime="20211110 05:35:28.221" endtime="20211110 05:35:32.158"/>
+</suite>
+<statistics>
+<total>
+<stat pass="4" fail="3" skip="0">All Tests</stat>
+</total>
+<tag>
+<stat pass="1" fail="1" skip="0">Hello</stat>
+<stat pass="1" fail="2" skip="0">Regression</stat>
+<stat pass="2" fail="1" skip="0">Smoke</stat>
+</tag>
+<suite>
+<stat pass="4" fail="3" skip="0" id="s1" name="AllCases">AllCases</stat>
+<stat pass="0" fail="2" skip="0" id="s1-s1" name="E2E">AllCases.E2E</stat>
+<stat pass="0" fail="1" skip="0" id="s1-s1-s1" name="StudentID">AllCases.E2E.StudentID</stat>
+<stat pass="0" fail="1" skip="0" id="s1-s1-s2" name="Validate Code">AllCases.E2E.Validate Code</stat>
+<stat pass="3" fail="0" skip="0" id="s1-s2" name="Get Del">AllCases.Get Del</stat>
+<stat pass="1" fail="0" skip="0" id="s1-s2-s1" name="Get request">AllCases.Get Del.Get request</stat>
+<stat pass="1" fail="0" skip="0" id="s1-s2-s2" name="GetParam">AllCases.Get Del.GetParam</stat>
+<stat pass="1" fail="0" skip="0" id="s1-s2-s3" name="ID request">AllCases.Get Del.ID request</stat>
+<stat pass="1" fail="1" skip="0" id="s1-s3" name="Put Post">AllCases.Put Post</stat>
+<stat pass="0" fail="1" skip="0" id="s1-s3-s1" name="Json postdata">AllCases.Put Post.Json postdata</stat>
+<stat pass="1" fail="0" skip="0" id="s1-s3-s2" name="Post request">AllCases.Put Post.Post request</stat>
+</suite>
+</statistics>
+<errors>
+<msg timestamp="20211110 05:35:28.180" level="ERROR">Error in file 'C:\APITest\API-Automation\AllCases\Get_Del\Get_request.robot' on line 4: Non-existing setting '[Setup]'.</msg>
+<msg timestamp="20211110 05:35:29.378" level="WARN">Keyword 'RequestsLibrary.To Json' is deprecated. Please use ${resp.json()} instead. Have a look at the improved HTML output as pretty printing replacement.</msg>
+<msg timestamp="20211110 05:35:29.496" level="ERROR">Error in file 'C:\APITest\API-Automation\AllCases\E2E\Validate_Code.robot' on line 5: Resource file '..\..\..\Resources\UserKeyword.robot' does not exist.</msg>
+<msg timestamp="20211110 05:35:29.558" level="ERROR">Error in file 'C:\APITest\API-Automation\Resources\UserKeyword.robot' on line 5: Test library '..\TestCases\Validatejson.py' does not exist.</msg>
+<msg timestamp="20211110 05:35:30.900" level="WARN">Keyword 'RequestsLibrary.To Json' is deprecated. Please use ${resp.json()} instead. Have a look at the improved HTML output as pretty printing replacement.</msg>
+<msg timestamp="20211110 05:35:31.611" level="ERROR">Error in file 'C:\APITest\API-Automation\AllCases\Put_Post\Json_postdata.robot' on line 5: Resource file '..\..\..\Resources\UserKeyword.robot' does not exist.</msg>
+</errors>
+</robot>

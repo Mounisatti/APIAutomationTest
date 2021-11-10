@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 4.1.1 (Python 3.10.0 on win32)" generated="20211110 08:02:56.248" rpa="false" schemaversion="2">
+<suite id="s1" name="PutReq" source="C:\APITest\API-Automation\AllCases\Put_Post\PutReq.robot">
+<test id="s1-t1" name="TC1_Put">
+<kw name="Create Session" library="RequestsLibrary">
+<arg>Updated_data</arg>
+<arg>${url}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<msg timestamp="20211110 08:02:56.902" level="INFO">Creating Session using : alias=Updated_data, url=http://thetestingworldapi.com/, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" starttime="20211110 08:02:56.901" endtime="20211110 08:02:56.903"/>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<var>&amp;{body}</var>
+<arg>id=527291</arg>
+<arg>first_name=Testing</arg>
+<arg>middle_name=apitesting123</arg>
+<arg>last_name=World</arg>
+<arg>date_of_birth=7/11/2021</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20211110 08:02:56.906" level="INFO">&amp;{body} = { id=527291 | first_name=Testing | middle_name=apitesting123 | last_name=World | date_of_birth=7/11/2021 }</msg>
+<status status="PASS" starttime="20211110 08:02:56.904" endtime="20211110 08:02:56.906"/>
+</kw>
+<kw name="PUT On Session" library="RequestsLibrary">
+<var>${response}</var>
+<arg>Updated_data</arg>
+<arg>api/studentsDetails/${id}</arg>
+<arg>data=${body}</arg>
+<doc>Sends a PUT request on a previously created HTTP Session.</doc>
+<msg timestamp="20211110 08:02:57.367" level="INFO">PUT Request : url=http://thetestingworldapi.com/api/studentsDetails/527291 
+ path_url=/api/studentsDetails/527291 
+ headers={'User-Agent': 'python-requests/2.26.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '98', 'Content-Type': 'application/x-www-form-urlencoded'} 
+ body=id=527291&amp;first_name=Testing&amp;middle_name=apitesting123&amp;last_name=World&amp;date_of_birth=7%2F11%2F2021 
+ </msg>
+<msg timestamp="20211110 08:02:57.368" level="INFO">PUT Response : url=http://thetestingworldapi.com/api/studentsDetails/527291 
+ status=200, reason=OK 
+ headers={'Cache-Control': 'no-cache', 'Pragma': 'no-cache', 'Content-Type': 'application/json; charset=utf-8', 'Expires': '-1', 'Server': 'Microsoft-IIS/8.5', 'X-AspNet-Version': '4.0.30319', 'X-Powered-By': 'ASP.NET', 'X-Powered-By-Plesk': 'PleskWin', 'Date': 'Wed, 10 Nov 2021 02:32:57 GMT', 'Content-Length': '46'} 
+ body={"status":"true","msg":"update  data success"} 
+ </msg>
+<msg timestamp="20211110 08:02:57.368" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20211110 08:02:56.907" endtime="20211110 08:02:57.369"/>
+</kw>
+<kw name="Convert To String" library="BuiltIn">
+<var>${code}</var>
+<arg>${response.status_code}</arg>
+<doc>Converts the given item to a Unicode string.</doc>
+<msg timestamp="20211110 08:02:57.371" level="INFO">${code} = 200</msg>
+<status status="PASS" starttime="20211110 08:02:57.369" endtime="20211110 08:02:57.371"/>
+</kw>
+<kw name="GET On Session" library="RequestsLibrary">
+<var>${response1}</var>
+<arg>Updated_data</arg>
+<arg>api/studentsDetails/${id}</arg>
+<doc>Sends a GET request on a previously created HTTP Session.</doc>
+<msg timestamp="20211110 08:02:57.602" level="INFO">GET Request : url=http://thetestingworldapi.com/api/studentsDetails/527291 
+ path_url=/api/studentsDetails/527291 
+ headers={'User-Agent': 'python-requests/2.26.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg timestamp="20211110 08:02:57.602" level="INFO">GET Response : url=http://thetestingworldapi.com/api/studentsDetails/527291 
+ status=200, reason=OK 
+ headers={'Cache-Control': 'no-cache', 'Pragma': 'no-cache', 'Content-Type': 'application/json; charset=utf-8', 'Expires': '-1', 'Server': 'Microsoft-IIS/8.5', 'X-AspNet-Version': '4.0.30319', 'X-Powered-By': 'ASP.NET', 'X-Powered-By-Plesk': 'PleskWin', 'Date': 'Wed, 10 Nov 2021 02:32:57 GMT', 'Content-Length': '139'} 
+ body={"status":"true","data":{"id":527291,"first_name":"Testing","middle_name":"apitesting123","last_name":"World","date_of_birth":"7/11/2021"}} 
+ </msg>
+<msg timestamp="20211110 08:02:57.603" level="INFO">${response1} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20211110 08:02:57.372" endtime="20211110 08:02:57.603"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>${response1.content}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20211110 08:02:57.604" endtime="20211110 08:02:57.607"/>
+</kw>
+<tag>Sanity</tag>
+<status status="PASS" starttime="20211110 08:02:56.900" endtime="20211110 08:02:57.608"/>
+</test>
+<status status="PASS" starttime="20211110 08:02:56.252" endtime="20211110 08:02:57.612"/>
+</suite>
+<statistics>
+<total>
+<stat pass="1" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+<stat pass="1" fail="0" skip="0">Sanity</stat>
+</tag>
+<suite>
+<stat pass="1" fail="0" skip="0" id="s1" name="PutReq">PutReq</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>

@@ -9,6 +9,7 @@ ${id}  527291
 
 *** Test Cases ***
 TC1_Put
+    [Tags]  Sanity
     create session  Updated_data  ${url}
     &{body}=  create dictionary  id=527291  first_name=Testing  middle_name=apitesting123  last_name=World  date_of_birth=7/11/2021
     ${response}=  put on session  Updated_data  api/studentsDetails/${id}  data=${body}

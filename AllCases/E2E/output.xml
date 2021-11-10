@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 4.1.1 (Python 3.10.0 on win32)" generated="20211110 06:52:19.994" rpa="false" schemaversion="2">
+<suite id="s1" name="Validate Code" source="C:\APITest\API-Automation\AllCases\E2E\Validate_Code.robot">
+<test id="s1-t1" name="TC1_FectData">
+<kw name="Fetch_The_Details" library="UserKeyword">
+<arg>50</arg>
+<arg>200</arg>
+<kw name="Create Session" library="RequestsLibrary">
+<arg>Stu_data</arg>
+<arg>${Url}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<msg timestamp="20211110 06:52:20.661" level="INFO">Creating Session using : alias=Stu_data, url=http://thetestingworldapi.com/, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" starttime="20211110 06:52:20.659" endtime="20211110 06:52:20.662"/>
+</kw>
+<kw name="GET On Session" library="RequestsLibrary">
+<var>${response}</var>
+<arg>Stu_data</arg>
+<arg>api/studentsDetails/${Stu_id}</arg>
+<doc>Sends a GET request on a previously created HTTP Session.</doc>
+<msg timestamp="20211110 06:52:21.148" level="INFO">GET Request : url=http://thetestingworldapi.com/api/studentsDetails/50 
+ path_url=/api/studentsDetails/50 
+ headers={'User-Agent': 'python-requests/2.26.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg timestamp="20211110 06:52:21.148" level="INFO">GET Response : url=http://thetestingworldapi.com/api/studentsDetails/50 
+ status=200, reason=OK 
+ headers={'Cache-Control': 'no-cache', 'Pragma': 'no-cache', 'Content-Type': 'application/json; charset=utf-8', 'Expires': '-1', 'Server': 'Microsoft-IIS/8.5', 'X-AspNet-Version': '4.0.30319', 'X-Powered-By': 'ASP.NET', 'X-Powered-By-Plesk': 'PleskWin', 'Date': 'Wed, 10 Nov 2021 01:22:21 GMT', 'Content-Length': '40'} 
+ body={"status":"false","msg":"No data Found"} 
+ </msg>
+<msg timestamp="20211110 06:52:21.149" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20211110 06:52:20.662" endtime="20211110 06:52:21.149"/>
+</kw>
+<kw name="Convert To String" library="BuiltIn">
+<var>${status}</var>
+<arg>${response.status_code}</arg>
+<doc>Converts the given item to a Unicode string.</doc>
+<msg timestamp="20211110 06:52:21.152" level="INFO">${status} = 200</msg>
+<status status="PASS" starttime="20211110 06:52:21.149" endtime="20211110 06:52:21.152"/>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<arg>${Status_code}</arg>
+<arg>${Status}</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" starttime="20211110 06:52:21.152" endtime="20211110 06:52:21.153"/>
+</kw>
+<status status="PASS" starttime="20211110 06:52:20.658" endtime="20211110 06:52:21.153"/>
+</kw>
+<kw name="Fetch_Return_Data" library="UserKeyword">
+<var>${response}</var>
+<arg>50</arg>
+<kw name="Create Session" library="RequestsLibrary">
+<arg>Stu_data</arg>
+<arg>${Url}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<msg timestamp="20211110 06:52:21.156" level="INFO">Creating Session using : alias=Stu_data, url=http://thetestingworldapi.com/, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" starttime="20211110 06:52:21.155" endtime="20211110 06:52:21.159"/>
+</kw>
+<kw name="GET On Session" library="RequestsLibrary">
+<var>${response}</var>
+<arg>Stu_data</arg>
+<arg>api/studentsDetails/${Stu_id}</arg>
+<doc>Sends a GET request on a previously created HTTP Session.</doc>
+<msg timestamp="20211110 06:52:21.613" level="INFO">GET Request : url=http://thetestingworldapi.com/api/studentsDetails/50 
+ path_url=/api/studentsDetails/50 
+ headers={'User-Agent': 'python-requests/2.26.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg timestamp="20211110 06:52:21.614" level="INFO">GET Response : url=http://thetestingworldapi.com/api/studentsDetails/50 
+ status=200, reason=OK 
+ headers={'Cache-Control': 'no-cache', 'Pragma': 'no-cache', 'Content-Type': 'application/json; charset=utf-8', 'Expires': '-1', 'Server': 'Microsoft-IIS/8.5', 'X-AspNet-Version': '4.0.30319', 'X-Powered-By': 'ASP.NET', 'X-Powered-By-Plesk': 'PleskWin', 'Date': 'Wed, 10 Nov 2021 01:22:21 GMT', 'Content-Length': '40'} 
+ body={"status":"false","msg":"No data Found"} 
+ </msg>
+<msg timestamp="20211110 06:52:21.614" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20211110 06:52:21.160" endtime="20211110 06:52:21.614"/>
+</kw>
+<msg timestamp="20211110 06:52:21.615" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20211110 06:52:21.154" endtime="20211110 06:52:21.615"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>${response.content}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20211110 06:52:21.617" endtime="20211110 06:52:21.620"/>
+</kw>
+<status status="PASS" starttime="20211110 06:52:20.657" endtime="20211110 06:52:21.621"/>
+</test>
+<status status="PASS" starttime="20211110 06:52:19.999" endtime="20211110 06:52:21.626"/>
+</suite>
+<statistics>
+<total>
+<stat pass="1" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat pass="1" fail="0" skip="0" id="s1" name="Validate Code">Validate Code</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>

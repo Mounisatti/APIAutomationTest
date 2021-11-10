@@ -2,6 +2,7 @@
 Library  RequestsLibrary
 Library  JSONLibrary
 Library  Collections
+Default Tags  Hello
 
 *** Variables ***
 ${url}  http://thetestingworldapi.com/

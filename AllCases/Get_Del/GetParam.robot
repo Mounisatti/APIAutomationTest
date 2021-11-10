@@ -8,6 +8,7 @@ ${url}  https://reqres.in
 
 *** Test Cases ***
 Test1
+    [Tags]  Smoke
     create session  Get_Param  ${url}
     &{param}=  create dictionary  page=2
     ${response}=  get on session  Get_param  /api/users  params=${param}
